@@ -1,3 +1,6 @@
+# About
+Solution for http://www.smashingmagazine.com/2014/07/dont-be-scared-of-functional-programming/
+
 # Babel Starter Kit
 
 [![NPM version](http://img.shields.io/npm/v/generator-javascript.svg?style=flat-square)](http://npmjs.org/generator-javascript)
