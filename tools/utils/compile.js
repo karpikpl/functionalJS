@@ -32,12 +32,16 @@ const markdown = new Markdown({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(lang, str).value;
-      } catch (_) {}
+      } catch (_) {
+        console.log(_);
+      }
     }
 
     try {
       return hljs.highlightAuto(str).value;
-    } catch (_) {}
+    } catch (_) {
+      console.log(_);
+    }
 
     return ''; // use external default escaping
   }

@@ -4,5 +4,8 @@
  */
 
 import Greeting from './Greeting.js';
+import Functional from './Functional.js';
+import NonFunctional from './NonFunctional.js';
 
-export default { Greeting };
+
+export default { Greeting, Functional, NonFunctional };
