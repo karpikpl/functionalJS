@@ -3,8 +3,14 @@
  * Copyright (c) Konstantin Tarkus <hello@tarkus.me> | The MIT License
  */
 
-import { describe, it } from 'mocha';
-import { expect } from 'chai';
+import {
+  describe, it
+}
+from 'mocha';
+import {
+  expect
+}
+from 'chai';
 import Functional from '../src/Functional';
 
 describe('Functional', () => {
@@ -40,4 +46,29 @@ describe('Functional', () => {
     expect(result).to.deep.equal(expectedData);
   });
 
+  it('Calculates sum for a given array', () => {
+    // Arrange
+    const functional = new Functional();
+    const arr = [3, 4, 5, 8];
+    const expectedResult = 20;
+
+    // Act
+    const result = functional.totalForArray(0, arr);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
+
+  it('Calculates sum for a given array using reduce', () => {
+    // Arrange
+    const functional = new Functional();
+    const arr = [3, 4, 5, 8];
+    const expectedResult = 20;
+
+    // Act
+    const result = functional.totalForArrayReduce(arr);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
 });

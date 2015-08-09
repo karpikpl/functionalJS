@@ -3,8 +3,14 @@
  * Copyright (c) Konstantin Tarkus <hello@tarkus.me> | The MIT License
  */
 
-import { describe, it } from 'mocha';
-import { expect } from 'chai';
+import {
+  describe, it
+}
+from 'mocha';
+import {
+  expect
+}
+from 'chai';
 import NonFunctional from '../src/NonFunctional';
 
 describe('NonFunctional', () => {
@@ -36,7 +42,7 @@ describe('NonFunctional', () => {
     // Act
     const result = nonFunctional.process(testData);
 
-    // Arrange
+    // Assert
     expect(result).to.deep.equal(expectedData);
   });
 
