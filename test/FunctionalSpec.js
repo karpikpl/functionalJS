@@ -46,14 +46,14 @@ describe('Functional', () => {
     expect(result).to.deep.equal(expectedData);
   });
 
-  it('Calculates sum for a given array', () => {
+  it('Calculates sum for a given array using recursion', () => {
     // Arrange
     const functional = new Functional();
     const arr = [3, 4, 5, 8];
     const expectedResult = 20;
 
     // Act
-    const result = functional.totalForArray(0, arr);
+    const result = functional.totalForArrayRecursive(0, arr);
 
     // Assert
     expect(result).to.be.equal(expectedResult);
@@ -66,9 +66,38 @@ describe('Functional', () => {
     const expectedResult = 20;
 
     // Act
-    const result = functional.totalForArrayReduce(arr);
+    const result = functional.totalForArray(arr);
 
     // Assert
     expect(result).to.be.equal(expectedResult);
   });
+
+  it('Add should sum two integers', () => {
+    // Arrange
+    const functional = new Functional();
+    const a = -1,
+      b = 2;
+    const expectedResult = 1;
+
+    // Act
+    const result = functional.add(a, b);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
+
+  it('average should return arithmetic average for given sum and count', () => {
+    // Arrange
+    const functional = new Functional();
+    const total = 12;
+    const count = 4;
+    const expectedResult = 3;
+
+    // Act
+    const result = functional.average(total, count);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
+
 });
