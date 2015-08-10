@@ -198,4 +198,17 @@ describe('Functional', () => {
     // Assert
     expect(result).to.deep.equal(expectedData);
   });
+
+  it('Extends one array with values from another array, it shouldnt change the starting array', () => {
+    // Arrange
+    const functional = new Functional();
+    const arrayToExtend = [['a', 1]];
+    const newData = [6];
+
+    // Act
+    const result = functional.extendArray(arrayToExtend, newData);
+
+    // Assert
+    expect(arrayToExtend[0].length).to.equal(2);
+  });
 });
