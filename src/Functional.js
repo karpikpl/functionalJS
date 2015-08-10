@@ -4,12 +4,15 @@
 // 3. No loops!
 
 class Functional {
-  process(argument) {
-    console.log(`Running Functional with ${JSON.stringify(argument)}`);
+  process(data) {
+    console.log(`Running Functional with ${JSON.stringify(data)}`);
 
-    //var totalTemp = this.totalForArray(temperatures);
+    var allTemperatures = this.pluck(data, 'temperatures');
+    var avarageTemps = allTemperatures.map((arr) => {return this.averageForArray(arr); });
+    var populations = this.pluck(data, 'population');
 
-    return [];
+    var result = this.combineArrays(avarageTemps, populations);
+    return result;
   }
 
   totalForArrayRecursive(currentTotal, arr) {
@@ -25,11 +28,10 @@ class Functional {
   }
 
   totalForArray(arr) {
-    console.log(`Running total for array for ${arr} with ${arr.reduce}`)
     return arr.reduce(this.add);
   }
 
-  add = function(a, b) {
+  add(a, b) {
     return a + b;
   }
 
@@ -38,7 +40,40 @@ class Functional {
   }
 
   averageForArray(arr) {
-    return average(totalForArray(arr), arr.length);
+    return this.average(this.totalForArray(arr), arr.length);
+  }
+
+  // Pass in the name of the property that you'd like to retrieve
+  getItem(propertyName) {
+    // Return a function that retrieves that item, but don't execute the function.
+    // We'll leave that up to the method that is taking action on items in our
+    // array.
+    return function(item) {
+      return item[propertyName];
+    };
+  }
+
+  pluck(arr, propertyName) {
+    return arr.map(this.getItem(propertyName));
+  }
+
+  combineArrays(arr1, arr2, finalArr) {
+    // Just so we don't have to remember to pass an empty array as the third
+    // argument when calling this function, we'll set a default.
+    finalArr = finalArr || [];
+
+    // Push the current element in each array into what we'lll eventually return
+    finalArr.push([arr1[0], arr2[0]]);
+
+    var remaining1 = arr1.slice(1);
+    var remaining2 = arr2.slice(1);
+
+    if (remaining1.length === 0 && remaining2.length === 0) {
+      return finalArr;
+    } else {
+      // recursion!
+      return this.combineArrays(remaining1, remaining2, finalArr);
+    }
   }
 }
 

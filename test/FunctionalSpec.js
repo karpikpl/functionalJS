@@ -100,4 +100,75 @@ describe('Functional', () => {
     expect(result).to.be.equal(expectedResult);
   });
 
+  it('Avarage for array should return the arithmetic avarage for the elements of the array', () => {
+    // Arrange
+    const functional = new Functional();
+    const arr = [3, 4, 5, 8];
+    const expectedResult = 5;
+
+    // Act
+    const result = functional.averageForArray(arr);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
+
+  it('getItem should return a function that returns a value of a given property', () => {
+    // Arrange
+    const functional = new Functional();
+    const myData = {
+      myprop: 'someData'
+    };
+    const expectedResult = 'someData';
+
+    // Act
+    const result = functional.getItem('myprop')(myData);
+
+    // Assert
+    expect(result).to.be.equal(expectedResult);
+  });
+
+  it('pluck should return a collection with a given property', () => {
+    // Arrange
+    const functional = new Functional();
+    const myData = [{
+      aProp: 'a1Val',
+      bProp: 4
+    }, {
+      aProp: 'a2Val',
+      bProp: 2
+    }, {
+      aProp: 'a3Val',
+      bProp: 5
+    }];
+    const expectedResult = ['a1Val','a2Val', 'a3Val'];
+
+    // Act
+    const result = functional.pluck(myData, 'aProp');
+
+    // Assert
+    expect(result).to.deep.equal(expectedResult);
+  });
+
+  it('pluck should return a collection with a given property when array', () => {
+    // Arrange
+    const functional = new Functional();
+    const myData = [{
+      aProp: 'a1Val',
+      bProp: [4, 4]
+    }, {
+      aProp: 'a2Val',
+      bProp: [2,6]
+    }, {
+      aProp: 'a3Val',
+      bProp: [5,7]
+    }];
+    const expectedResult = [[4,4], [2,6], [5,7]];
+
+    // Act
+    const result = functional.pluck(myData, 'bProp');
+
+    // Assert
+    expect(result).to.deep.equal(expectedResult);
+  });
 });
