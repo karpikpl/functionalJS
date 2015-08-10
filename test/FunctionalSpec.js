@@ -30,9 +30,9 @@ describe('Functional', () => {
   }];
 
   var expectedData = [
-    [55.25, 2047],
-    [5.5, 3568],
-    [75, 1000000]
+    ['Jamestown', 2047, 55.25],
+    ['Awesome Town', 3568, 5.5],
+    ['Funky Town', 1000000, 75]
   ];
 
   it('Processes data and gives correct result', () => {
@@ -141,7 +141,7 @@ describe('Functional', () => {
       aProp: 'a3Val',
       bProp: 5
     }];
-    const expectedResult = ['a1Val','a2Val', 'a3Val'];
+    const expectedResult = ['a1Val', 'a2Val', 'a3Val'];
 
     // Act
     const result = functional.pluck(myData, 'aProp');
@@ -158,17 +158,44 @@ describe('Functional', () => {
       bProp: [4, 4]
     }, {
       aProp: 'a2Val',
-      bProp: [2,6]
+      bProp: [2, 6]
     }, {
       aProp: 'a3Val',
-      bProp: [5,7]
+      bProp: [5, 7]
     }];
-    const expectedResult = [[4,4], [2,6], [5,7]];
+    const expectedResult = [
+      [4, 4],
+      [2, 6],
+      [5, 7]
+    ];
 
     // Act
     const result = functional.pluck(myData, 'bProp');
 
     // Assert
     expect(result).to.deep.equal(expectedResult);
+  });
+
+
+  it('Extends one array with values from another array', () => {
+    // Arrange
+    const functional = new Functional();
+    const arrayToExtend = [
+      ['a', 1],
+      ['b', 2],
+      ['c', 3]
+    ];
+    const newData = [6, 7, 8];
+    const expectedData = [
+      ['a', 1, 6],
+      ['b', 2, 7],
+      ['c', 3, 8]
+    ];
+
+    // Act
+    const result = functional.extendArray(arrayToExtend, newData);
+
+    // Assert
+    expect(result).to.deep.equal(expectedData);
   });
 });

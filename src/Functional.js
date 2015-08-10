@@ -8,11 +8,16 @@ class Functional {
     console.log(`Running Functional with ${JSON.stringify(data)}`);
 
     var allTemperatures = this.pluck(data, 'temperatures');
-    var avarageTemps = allTemperatures.map((arr) => {return this.averageForArray(arr); });
-    var populations = this.pluck(data, 'population');
 
-    var result = this.combineArrays(avarageTemps, populations);
-    return result;
+    // TODO consider usinb bind here (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+    var avarageTemps = allTemperatures.map((arr) => {
+      return this.averageForArray(arr);
+    });
+    var populationsAndNames = data.map((item) => {
+      return [item.name, item.population];
+    });
+
+    return this.extendArray(populationsAndNames, avarageTemps);
   }
 
   totalForArrayRecursive(currentTotal, arr) {
@@ -73,6 +78,26 @@ class Functional {
     } else {
       // recursion!
       return this.combineArrays(remaining1, remaining2, finalArr);
+    }
+  }
+
+  extendArray(arrToExtend, arr2, finalArr) {
+    // Just so we don't have to remember to pass an empty array as the third
+    // argument when calling this function, we'll set a default.
+    finalArr = finalArr || [];
+
+    // Push the current element in each array into what we'lll eventually return
+    finalArr.push(arrToExtend[0]);
+    finalArr[finalArr.length - 1].push(arr2[0]);
+
+    var remaining1 = arrToExtend.slice(1);
+    var remaining2 = arr2.slice(1);
+
+    if (remaining1.length === 0 && remaining2.length === 0) {
+      return finalArr;
+    } else {
+      // recursion!
+      return this.extendArray(remaining1, remaining2, finalArr);
     }
   }
 }
