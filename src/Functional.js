@@ -87,7 +87,8 @@ class Functional {
     finalArr = finalArr || [];
 
     // Push the current element in each array into what we'lll eventually return
-    finalArr.push(arrToExtend[0]);
+    // slice will make a copy of all elements
+    finalArr.push(arrToExtend[0].slice(0));
     finalArr[finalArr.length - 1].push(arr2[0]);
 
     var remaining1 = arrToExtend.slice(1);
