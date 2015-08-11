@@ -9,15 +9,14 @@ class Functional {
 
     var allTemperatures = this.pluck(data, 'temperatures');
 
-    // TODO consider usinb bind here (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
-    var avarageTemps = allTemperatures.map((arr) => {
-      return this.averageForArray(arr);
-    });
+    // this is the same as: averageTemps = allTemperatures.map((arr) => { return this.averageForArray(arr); });
+    var averageTemps = allTemperatures.map(this.averageForArray.bind(this));
+
     var populationsAndNames = data.map((item) => {
       return [item.name, item.population];
     });
 
-    return this.extendArray(populationsAndNames, avarageTemps);
+    return this.extendArray(populationsAndNames, averageTemps);
   }
 
   totalForArrayRecursive(currentTotal, arr) {
@@ -45,6 +44,7 @@ class Functional {
   }
 
   averageForArray(arr) {
+    console.log(`function called with ${arguments}`);
     return this.average(this.totalForArray(arr), arr.length);
   }
 
